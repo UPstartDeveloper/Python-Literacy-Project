@@ -9,8 +9,8 @@ This document will jumpstart your understanding of Python. We will cover all the
 1. [Data Types](#data-types)
 2. [Variables](#variables)
 3. [Control Flow](#control-flow)
-4. [Functions](#functions)
-5. [Container Types](#container-types)
+4. [Container Types](#container-types)
+5. [Functions](#functions)
 6. [Credits](#credits) 
 
 ## Data Types
@@ -186,10 +186,7 @@ Here are examples of when we can interchange values between the `int`, `float`, 
     ```python
     print('I am {} years old.'.format(str(29)))
     ```
-
-    ```python
-    str(-3.14)
-    ```
+    **Note**: don't be intimidated by the syntax of the above statement - it is just another form of string formatting! The result is the program will display a message that says `'I am 29 years old.'`. Please look at the [Python documentation](https://docs.python.org/3/library/stdtypes.html#str.format) if you are curious to learn more.
 
 2. Float to Integer:
 
@@ -232,6 +229,262 @@ _spam = 'Hello'
 Because of how `_spam` is named, we know it is not a variable we should use again in the code.
 
 ## Control Flow
+While knowing how to store data is nice, it is even cooler to be able to write programs that can let the computer do certain tasks for us.
+
+*Control flow* refers to how the computer figures out what to do with our data in a given situation. This is most often done through giving the computer specific conditions on what to do in a given scenario ahead of time.
+
+For example, you may do this yourself when deciding what clothes to wear outside. You might decide whether to wear sunglasses or not, based on if the sun is shining. If we were to write *pseudocode* for this decision, it might look like the following:
+```
+if the sun_is_out,
+    THEN, I will wear_sunglasses()!
+```
+This process can be almost exactly replicated in Python code - the first piece to making it possible is *comparison operators*!
+### Comparison Operators
+*Comparison operators* help our program decide whether or not a given piece data meets a given condition. 
+
+Table 3 shows the comparison operators found in Python:
+##### Table 3: Comparison Operators and What They Mean
+
+| Operator | Meaning                  |
+| -------- | ------------------------ |
+| `==`     | Equal to                 |
+| `!=`     | Not equal to             |
+| `<`      | Less than                |
+| `>`      | Greater Than             |
+| `<=`     | Less than or Equal to    |
+| `>=`     | Greater than or Equal to |
+
+These operators evaluate to True or False depending on the values you give them. They all follow a syntax of `data <operator_goes_here> condition` (but you don't necessarily have to put the `data` on the left side and `condition` on the right).
+
+**Note**: since the result of a comparison operation is only True or False, this means comparison operators *must* return Boolean(`bool`) values.
+
+Here are a few examples of Boolean operations - can you tell if they evaluate to `True` or `False`?
+
+1. With Numeric Data:
+    ```python
+    42 == 42  
+    ```
+
+    ```python
+    40 == 42
+    ```
+
+    ```python
+    42 == 42.0
+    ```
+2. With String Data:
+    ```python
+    'hello' == 'hello'
+    ```
+
+    ```python
+    'dog' != 'cat'
+    ```
+
+    ```python
+    42 == '42'
+    ```
+    **Note**: comparison operators are *case-sensitve* - that is, they will not judge two characters as equal if one is lower case and the other is upper case. The following code snippet demonstrates this:
+    ```python
+    'hello' == 'Hello'
+    ```
+### Boolean Operators
+
+There are also operators specifically meant for working with `bool` values. Specifically, the four Boolean operators are `is`, `and`, `or`, and `not`.
+
+Tables 4-7 show where each of these operators returns `True` or `False`:
+
+
+##### Table 4: The *is* Operator’s *Truth* Table:
+
+| Expression      | Evaluates to |
+| --------------- | ------------ |
+| True is True   | True         |
+| True is False  | False        |
+| False is True  | False        |
+| False is False | True         |
+
+##### Table 5: The *and* Operator’s *Truth* Table:
+
+| Expression      | Evaluates to |
+| --------------- | ------------ |
+| True and True   | True         |
+| True and False  | False        |
+| False and True  | False        |
+| False and False | False        |
+
+##### Table 6: The *or* Operator’s *Truth* Table:
+
+| Expression     | Evaluates to |
+| -------------- | ------------ |
+| True or True   | True         |
+| True or False  | True         |
+| False or True  | True         |
+| False or False | False        |
+
+##### Table 7: The *not* Operator’s *Truth* Table:
+
+| Expression | Evaluates to |
+| ---------- | ------------ |
+| not True   | False        |
+| not False  | True         |
+### Boolean evaluation
+
+By convention, Python programmers do not like to use the `==` or `!=` operators to evaluate `bool` values themselves. Instead, it is more popular to use the `is` or `is not` operators.
+
+Examples of What NOT To Do: 
+
+```python
+True == True
+```
+
+```python
+True != False
+```
+
+Do THIS Instead: 
+
+```python
+True is True
+```
+
+```python
+True is not False
+```
+
+### Mixing Boolean and Comparison Operators
+Just as we saw with mixing single and double quotes in strings, Python is not *totally* against us mixing Boolean and comparison operators. See if you can correctly identify the return value of each expression:
+
+```python
+(5 >= 7) and (5 < 6)  
+```
+
+```python
+(1 == 2) or (2 == 2)
+```
+**Note**: although we are mixing Boolean and comparison operators here, notice how we use parentheses `()` to clearly show the how the Boolean operators `or` and `and` are only working with values that have already been evaluated to be `True` or `False`.
+
+You can also use multiple Boolean operators in an expression, along with those comparison operators:
+
+```python
+(4 < 9) and not (-6 < 6) and (2 * 2 == 2 + 2)
+```
+
+### if Statements
+The `if` statement takes the value computed by a Boolean evaluation, and if it is `True` we can run a specific piece of code to so our program does the appropiate thing in that scenario.
+
+Going back to our sunglasses example above, we are one step closer to writing code that can tell our user when to put on sunglasses:
+
+```python
+if is_sun_out == True:
+    print("You're going to need sunglasses today!")
+```
+Don't forget to tab over all the code you want to be run in case the `if` statement is `True`!
+
+### else Statements
+The `else` statement is a complement to the `if` statement - that is, if the condition in the `if` statement evaluates to `False`, then control flow in our program will go and execute the code found indented below our `else` keyword:
+
+```python
+if is_sun_out == True:
+    print("You're going to need sunglasses today!")
+else:  # the sun is NOT out
+    print("You're all set :)")
+```
+
+### elif Statements
+The `else` keyword is nice, but it cannot be given a condition to evaluate by itself - it *has* to be paired with an `if` statement. This is not a good situation for scenarios where our program needs to be able to do more than just 1 of 2 actions.
+
+This is where the `elif` statement comes in handy - it is short for "else if". Like the `else` statement, it will be evaluated by control flow in our program, if the condition in our `if` statement is `False`. BUT, it can also be given a condition of its own, just like the `if` statement! to allow for writing more nuanced programs!
+
+For example, let's say you usually greet your friends `Andre` and `Rediet` when you first come to school. We can make special greetings for both of our friends in Python, with code such as the following:
+
+```python
+name = 'Andre'
+
+if name == 'Andre':
+    print('Wassup, Andre!')
+elif name == 'Rediet':
+    print('Howdy Rediet')
+```
+To go one step further, we can use an `if`, `elif`, and `else` all together! In a given program, control flow will only go to the block of code whose condition evaluates to `True`. This lets us write even more nuanced programs, such as being able to greet anyone we meet as we come into school, even if we don't already know their name:
+
+```python
+if name == 'Andre':
+    print('Wassup, Andre!')
+elif name == 'Rediet':
+    print('Howdy Rediet')
+else:  # name does not have a value yet, for some reason
+    print('Hey, nice to meet you!')
+    name = input("What's your name?")
+```
+
+### Implicit Boolean Evaluation
+It can be cumbersome to write out the full condition for an `if` or `elif` statement all the time - and that's why Python actually lets us take it out if we want:
+```python
+a = (2 + 2 == 4)
+
+if a is True:
+   pass
+if a is not False:
+   pass
+if a: 
+   pass
+```
+All of the `if` statements in the code above are equivalent - but that in the last `if` block above, we stopped right at `a`! This is an example of using *implicit boolean evaluation*. It is a great way to save yourself a few keystrokes, and if `a` has a `bool` data type, then this is still valid Python code! 
+
+### while Loop Statements
+The `while` loop is used just the `if` statement, except that it will exhaustively execute the code in its block. It will only stop once the condition it has evaluates to `False`:
+
+```python
+spam = 0
+
+while spam < 5:
+    print('Hello, world.')
+    spam = spam + 1
+```
+
+### for Loops and the range() Function
+Another kind of loop in Python is the `for` loop. Unlike the `while` loop, it doesn't need a condition - instead, `for` loops are used when we already know ahead of time how many *iterations*, or the number of times our code executes, that we want to have.
+
+Therefore, the syntax of the `for` loop is only there to let the program know how many iterations to go through.
+
+```python
+print('My name is')
+for i in range(5):
+    print('Jimmy Five Times ({})'.format(str(i)))
+```
+If you run the code snippet above, you will see the following output:
+```
+'Jimmy Five Times (0)'
+'Jimmy Five Times (1)'
+'Jimmy Five Times (2)'
+'Jimmy Five Times (3)'
+'Jimmy Five Times (4)'
+```
+Why is this happening?
+
+The `range()` function is commonly used in `for` loops, and it is a good one to remember - it essentially is used to set the value of `i` on each of the 5 iterations our `for` goes through. You may also read more about it on the [Python documentation](https://docs.python.org/3/library/stdtypes.html#range) as you wish.
+
+The `range()` function can also be called with three arguments. The first two arguments will be the *start* and *stop* values, and the third will be the *step* argument. The step is the amount that the variable is increased by after each iteration.
+
+Once the value of our *iterator* (in this case `i`) reaches or surpasses the value of the *stop* argument, our for loop terminates:
+
+```python
+for i in range(0, 10, 2):
+   print(i)
+```
+**Note**: when we only the `range()` function with 1 argument, then that is the *stop* argument - the defaults for the *start* and *step* parameters are 0 and 1, respectively.
+
+You can even use a negative number for the step argument to make the for loop count down instead of up.
+
+```python
+for i in range(5, -1, -1):
+    print(i)
+```
+
+...and that's it for control flow! Being able to use conditional statements like `if`, `elif`, and `else`, as well as being able to write loops will enable us to work with larger and larger datasets using Python. Speaking of which, let's see how Python represents large collections of data the next section, which is all about using container data types! 
+
+## Container Types
 
 ## Functions
 
@@ -245,8 +498,6 @@ def foo():
     ''' Function Docstring '''
     """
 ```
-
-## Container Types
 
 ## Credits
 
