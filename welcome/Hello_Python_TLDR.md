@@ -4,6 +4,13 @@ Hello reader,
 
 This document will jumpstart your understanding of Python. We will give a broad overview to all the foundational aspects of the programming language. Feel free to come back to this section - after all, even the most experienced programmers have to review the basics sometimes!
 
+1. [Data Types](#data-types)
+2. [Variables](#variables)
+3. [Control Flow](#control-flow)
+4. [Container Types](#container-types)
+5. [Functions](#functions)
+6. [Credits](#credits) 
+
 ## Data Types
 Programming languages give us an easy way to manipulate data in the computer - but first, the computer has to understand what kind of data we're dealing with!
 
@@ -345,15 +352,15 @@ Lists (represented by the `list` type) simply represent an *ordered sequence of 
 
 Just as strings are a sequence of textual characters, the `list` in Python allows us to collect lots of different values altogether sequentially, enclosed in a pair of square brackets (`[]`). 
 
-### Getting Individual Values in a List with Indexes
+#### Getting Individual Values in a List with Indexes
 Because the data in a Python `list` is in a sequence, we can retrieve individual values in that `list` (aka an *element of the list*) if we know where it is positioned in that list.
 
 The position of an element in a `list` is the *index* of that element. The index position of the first element is `0`, and the indices of the following elements incrementally increases by 1.
 
-### Negative Indexes
+#### Negative Indexes
 Python will also let us access elements from the back of the list, using negative index values. These begin with the value of `-1` for the very last element, and decrease by one as we move further to the left.
 
-### Getting Sublists with Slices
+#### Getting Sublists with Slices
 We can retrieve several items out of a `list` at once and put them in a new `list` by using a *slice* with the `:` operator.
 
 Slices have a similar syntax to the `range()` function - you can optionally pass in `start:stop:step` values when you use it, or use the default values.
@@ -375,7 +382,7 @@ spam[0:-1]  # result: ['cat', 'bat', 'rat']
 spam[:]  # result: ['cat', 'bat', 'rat', 'elephant']
 ```
 
-### Removing Values from Lists
+#### Removing Values from Lists
 One common way to do this is with the `del` keyword. Once an element from `list` is gone, all the elements that came after it will move over an index postion to the left.
 
 ```python
@@ -384,7 +391,7 @@ del spam[2]
 spam  # result: ['cat', 'bat', 'elephant']
 ```
 
-### Loops and Lists
+#### Loops and Lists
 Once we have a list, we can `for` loop if we want to do something on each of the elements. This is known as a *list traversal*.
 
 When we use the syntax `for iterator in my_list`, our `iterator` variable will be set equal to the value of each element in `my_list`, starting from the leftmost index. In the body of the for loop, we can then do what we like with that value:
@@ -396,14 +403,14 @@ for i, supply in enumerate(supplies):
     print('Index {} in supplies is: {}'.format(str(i), supply))
 ```
 
-### The in and not in Operators
+#### The in and not in Operators
 Python strives to be as close to readable English as possible. The `in` keyword was added to the language in order to help us deterimine if a given value is present in a container data type in Python. In the context of lists, it will return `True` or `False` depending on if the given value is equal to one of the elements in the given list:
 ```python
 'howdy' in ['hello', 'hi', 'howdy', 'heyas']
 ```
 This is also known as checking for *membership* of the data in the list. If we want to, we can also place `not` before the `in` operator, to check if the given value "is not" a member of that list.
 
-### Finding a Value in a List with the index Method
+#### Finding a Value in a List with the index Method
 Once we know a value exists in a list, wouldn't it be great to know what it's index position was?
 
 ```python
@@ -411,7 +418,7 @@ spam = ['Zophie', 'Pooka', 'Fat-tail', 'Pooka']
 spam.index('Pooka')
 ```
 
-### Adding Values to Lists with append and insert
+#### Adding Values to Lists with append and insert
 Values can be added to the end of a list with the `append()` method:
 
 **append()**:
@@ -431,7 +438,7 @@ spam.insert(1, 'chicken')
 spam
 ```
 
-### Removing Values from Lists with remove
+#### Removing Values from Lists with remove
 The `remove()` helps us delete a particular element from a list. It is different from using the `del` keyword, since we do not need to know the index of the element we want to delete:
 
 ```python
@@ -442,7 +449,7 @@ spam
 
 If the value appears multiple times in the list, only the first instance of the value will be removed.
 
-### Sorting the Values in a List with sort
+#### Sorting the Values in a List with sort
 The `sort()` functions are provided so we can easily order the elements of a list from least to greatest (if they are numerical values) or in lexicographical order (if they are strings).
 
 Invoking the `.sort()` method on an already existing `list` object will modify the elements of that list itself.
@@ -464,9 +471,275 @@ spam = ['ants', 'cats', 'dogs', 'badgers', 'elephants']
 sorted(spam)
 ```
 
+### Dictionaries and Structuring Data
+The next kind of container data type is the *dictionary* (represented as `dict` in Python). A dictionary is used to store an unordered collection of key-value pairs.
+
+The fact it is *unordered* means we cannot obtain values from a `dict`. However, all the keys in a `dict` are unique - so we can get a specific value from a `dict`, if we know the corresponding key.
+
+Example Dictionary:
+
+```python
+myCat = {'size': 'fat', 'color': 'gray', 'disposition': 'loud'}
+```
+
+#### The keys, values, and items Methods
+
+values():
+This function returns only the values in a dictionary:
+```python
+spam = {'color': 'red', 'age': 42}
+
+for v in spam.values():
+    print(v)
+```
+
+keys():
+This returns just the keys:
+```python
+for k in spam.keys():
+    print(k)
+```
+
+items():
+This will return both the keys, and their corresponding values:
+```python
+spam = {'color': 'red', 'age': 42}
+
+for k, v in spam.items():
+    print('Key: {} Value: {}'.format(k, str(v)))
+```
+
+#### Checking if a Key or Value Exists in a Dictionary
+The `in` operator can still be used with dictionaries:
+```python
+spam = {'name': 'Zoey', 'age': 7}
+'name' in spam.keys()  # equal to 'name' in spam
+```
+You can omit the call to keys() when checking for a key:
+```python
+'color' in spam
+```
+But not when checking for values:
+```python
+'Zophie' in spam.values()  
+```
+
+#### The get Method
+If you try to access a value in a `dict` with a key that isn't actually in that dictionary, the Python interpreter will throw a `KeyError` exception. To avoid this, we can use the `get()` method. 
+
+With this method, we can specify both the key for the value we want from the `dict`, AND also a default value as a second parameter. Therefore, if the key isn't actually in the `dict`, the method will instead return whatever default argument we passed in:
+
+```python
+picnic_items = {'apples': 5, 'cups': 2}
+'I am bringing {} cups.'.format(str(picnic_items.get('cups', 0)))
+```
+
+#### The setdefault Method
+The `setdefault()` method will add a key-value pair to our dictionary, if it doesn't already already exist.
+
+Let's consider this code. It is possible to add/update key-value pairs in a `dict` using square brackets (`[]`):
+
+```python
+spam = {'name': 'Pooka', 'age': 5}
+if 'color' not in spam:
+    spam['color'] = 'black'
+```
+
+Using `setdefault` we could make the same code more succinctly:
+
+```python
+spam = {'name': 'Pooka', 'age': 5}
+spam.setdefault('color', 'black')
+```
+
+Finallly, the last container data type we will discuss are sets!
+### Sets
+
+Sets are an unordered collection of elements. You can think of sets as 1-sided dictionaries - specifically, if dictionaries are collections of key-value pairs, then sets are what you would have if you only had the keys!
+
+Sets are mostly often used for membership testing, and eliminating duplicate entries. Set objects also support mathematical operations like *union*, *intersection*, *difference*, and *symmetric difference*.
+
+#### Initializing a set
+
+There are two ways to create sets: using curly braces `{}` and the bult-in function `set()` around a list:
+
+```python
+s = {1, 2, 3}
+s = set([1, 2, 3])
+```
+
+When creating an empty set, be sure to not use the `set()` function (you will get an empty dictionary if you use `{}` instead).
+
+```python
+s = {}
+type(s)
+```
+
+#### sets: unordered collections of unique elements
+
+A set automatically remove all the duplicate values.
+
+```python
+s = {1, 2, 3, 2, 3, 4}
+s
+```
+#### Adding Elements to a Set
+
+Using the `add()` method we can add a single element to the set.
+
+```python
+s = {1, 2, 3}
+s.add(4)
+s
+```
+
+And with `update()`, multiple ones .
+
+```python
+s = {1, 2, 3}
+s.update([2, 3, 4, 5, 6])
+s  # remember, sets automatically remove duplicates
+```
+
+#### Removing Elements From a Set
+
+Like lists, set provide a `remove()` to help us delete elements from it.
+
+Alternatively, you can also use the `discard()` method, which won't raise any errors if the argument passed is not actually in the `set`.
+
+```python
+s = {1, 2, 3}
+s.discard(3)
+s
+```
+
+```python
+s.discard(3)
+```
+
+#### Set Operations:
+
+1. `union()` or `|` will create a new set that contains all the elements from the sets provided.
+
+    ```python
+    s1 = {1, 2, 3}
+    s2 = {3, 4, 5}
+    s1.union(s2)  # or 's1 | s2'
+    ```
+
+2. `intersection` or `&` will return a set containing only the elements that are common to all of them.
+
+    ```python
+    s1 = {1, 2, 3}
+    s2 = {2, 3, 4}
+    s3 = {3, 4, 5}
+    s1.intersection(s2, s3)  # or 's1 & s2 & s3'
+    ```
+
+3. `difference` or `-` will return only the elements that are in one of the sets.
+
+    ```python
+    s1 = {1, 2, 3}
+    s2 = {2, 3, 4}
+    s1.difference(s2)  # or 's1 - s2'
+    ```
+
+4. `symetric_difference` or `^` will return all the elements that are *not* common between them.
+
+    ```python
+    s1 = {1, 2, 3}
+    s2 = {2, 3, 4}
+    s1.symmetric_difference(s2)  # or 's1 ^ s2'
+    ```
+
+Now that you about the most common data types in Python, you can see how we can start to store sizeable portions of data together for our programs. The last skill you will need before you can actually begin solving data science problems with Python is knowing how to work with *functions* - let's discuss these next!
+
+## Functions
+*Functions* are blocks of code which we can use to perform a certain task over and over again. 
+
+The first line of a function is its *declaration*. It includes the `def` keyword (to tell Python we are "defining" a function), the name of the function (which follows the naming rules as [variables](#variables) do), and then whatever *parameters* the function has go inside a pair of parentheses. 
+
+Parameters are nothing to be afraid of - they are special variables that can be used once the function is actually called!
+### Return Values and return Statements
+
+When creating a function using the `def` keyword, you can specify what the return value should be with a `return` keyword. A return statement consists of the following:
+
+- The `return` keyword.
+
+- The value or expression that the function should return.
+
+Once the flow of control hits a `return` statement, it will execute that line of code and exit the function.
+
+```python
+import random
+def getAnswer(answerNumber):
+    if answerNumber == 1:
+        return 'It is certain'
+    elif answerNumber == 2:
+        return 'It is decidedly so'
+    elif answerNumber == 3:
+        return 'Yes'
+    elif answerNumber == 4:
+        return 'Reply hazy try again'
+    elif answerNumber == 5:
+        return 'Ask again later'
+    elif answerNumber == 6:
+        return 'Concentrate and ask again'
+    elif answerNumber == 7:
+        return 'My reply is no'
+    elif answerNumber == 8:
+        return 'Outlook not so good'
+    elif answerNumber == 9:
+        return 'Very doubtful'
+```
+
+### The None Value
+Some functions have no `return` statement - these functions have a return value of `None`, which is just Python's way of representing the *absence* of data.
+
+For example, the `print()` function in Python has a return value of `None`:
+
+```python
+spam = print('Hello!')
+spam is None
+```
+
+*Note*: never compare to `None` with the `==` operator. Always use `is`.
+
+### Local and Global Scope
+All the variables in a Python program have a *scope*. *Scope* is how we describe the place in a program where we can actually access the value of a variable.
+
+To start off with, let's discuss the **2 main scopes in Python:**
+
+1. *Local*: we say all the variables *inside* of a function have a *local* scope - meaning, they can be only be accessed within the function body.
+
+2. *Global*: these are all the variables outside of any function.
+
+### Rules of Thumb For Scope:
+Here are some basic rules to remember, so you never run into issues with scope:
+
+1. The code in the global scope cannot use any local variables.
+
+2. However, a variable in a local scope can access global variables.
+
+3. The code in a function’s local scope cannot use variables in any other function.
+
+4. You *can* use the same name for different variables if they are in different scopes. That is, there can be a local variable named `spam` and a global variable also named `spam`. 
+
+### What Scope Does This Variable Have?
+
+There are four rules to tell whether a variable is in a local scope or global scope:
+
+1. If the variable is being used in the global scope (that is, outside of all functions), then it is always a global variable.
+
+2. If there is a global statement for that variable in a function, then it is a global variable.
+
+3. Otherwise, if the variable is used in an assignment statement in the function, then it is a local variable.
+
+4. However, if the variable is not used in an assignment statement, then it is a global variable.
+
 ## Credits
 
-This section would not be possible if not for the following sources:
+This section would not be possible if not for help from the following sources:
 
 1. *[Automate the Boring Stuff with Python](https://automatetheboringstuff.com/)*, a book by Al Sweigart under the [Creative Commons license](https://creativecommons.org/licenses/by-nc-sa/3.0/).
 2. The [Python Cheatsheet](https://www.pythoncheatsheet.org/) website and [GitHub repository](https://github.com/wilfredinni/python-cheatsheet) by wilfredinni.
