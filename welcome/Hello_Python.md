@@ -485,6 +485,339 @@ for i in range(5, -1, -1):
 ...and that's it for control flow! Being able to use conditional statements like `if`, `elif`, and `else`, as well as being able to write loops will enable us to work with larger and larger datasets using Python. Speaking of which, let's see how Python represents large collections of data the next section, which is all about using container data types! 
 
 ## Container Types
+We saw above that by using variables, we can save certain pieces of data in our Python program, to be used later. But, what if we suddenly had many different pieces of information to keep track of?
+```
+var1 = something
+var2 = something
+var3 = something
+var4 = something
+var5 = something
+var6 = something
+var7 = something
+...
+```
+You can imagine that it can quickly become impractical to try and keep track of all the data in our code only using variables. That is why Python provides us with certain *container types* - these are data types whose only job is to encapsulate lots of other values in them, all at the same time. 
+
+Let's go over the 4 most commonly used container types: lists, tuples, dictionaries, and sets.
+
+### Lists in Python
+Lists (represented by the `list` type) are the most straightforward container type. They simply represent an *ordered sequence of values*.
+
+Just as strings are a sequence of textual characters, the `list` in Python allows us to collect lots of different values altogether sequentially, enclosed in a pair of square brackets (`[]`). For example, consider the following list of animal names:
+```python
+['bat', 'cat',  'elephant', 'rat']
+```
+
+### Getting Individual Values in a List with Indexes
+Because the data in a Python `list` is in a sequence, we can retrieve individual values in that `list` (aka an *element of the list*) if we know where it is positioned in that list.
+
+Another name for the position of an element in a `list` is knowing the *index* of that element. These indices are *zero-indexed* as well, meaning the index position of the first element is `0`. The indices of the following elements incrementally increases by 1, as you can see in the examples that following:
+
+```python
+spam = ['bat', 'cat',  'elephant', 'rat']
+spam[0]  # result: 'bat'
+```
+
+```python
+spam[1]  # result: 'cat'
+```
+
+```python
+spam[2]  # result: 'elephant'
+```
+
+```python
+spam[3]  # result: 'rat'
+```
+
+### Negative Indexes
+Python will also let us access elements from the back of the list, using negative index values. These begin with the value of `-1` for the very last element, and decrease by one as we move further to the left.
+
+```python
+spam = ['cat', 'bat', 'rat', 'elephant']
+spam[-1]  # result: 'elephant'
+```
+### Getting Sublists with Slices
+We can retrieve several items out of a `list` at once and put them in a new `list` by using a *slice*.
+
+```python
+spam = ['cat', 'bat', 'rat', 'elephant']
+spam[0:4]
+```
+
+```python
+spam[1:3]
+```
+
+```python
+spam[0:-1]
+```
+
+```python
+spam = ['cat', 'bat', 'rat', 'elephant']
+spam[:2]
+```
+
+```python
+spam[1:]
+```
+
+```python
+spam[:]
+```
+
+### Getting a list Length with len
+
+```python
+spam = ['cat', 'dog', 'moose']
+len(spam)
+```
+
+### Changing Values in a List with Indexes
+
+```python
+spam = ['cat', 'bat', 'rat', 'elephant']
+spam[1] = 'aardvark'
+spam
+```
+
+```python
+spam[2] = spam[1]
+spam
+```
+
+```python
+spam[-1] = 12345
+spam
+```
+
+### List Concatenation and List Replication
+
+```python
+[1, 2, 3] + ['A', 'B', 'C']
+```
+
+```python
+['X', 'Y', 'Z'] * 3
+```
+
+```python
+spam = [1, 2, 3]
+spam = spam + ['A', 'B', 'C']
+spam
+```
+
+### Removing Values from Lists with del Statements
+
+```python
+spam = ['cat', 'bat', 'rat', 'elephant']
+del spam[2]
+spam
+```
+
+```python
+del spam[2]
+spam
+```
+
+### Using for Loops with Lists
+
+```python
+supplies = ['pens', 'staplers', 'flame-throwers', 'binders']
+
+for i, supply in enumerate(supplies):
+    print('Index {} in supplies is: {}'.format(str(i), supply))
+```
+
+### Looping Through Multiple Lists with zip
+
+```python
+name = ['Pete', 'John', 'Elizabeth']
+age = [6, 23, 44]
+
+for n, a in zip(name, age):
+    print('{} is {} years old'.format(n, a))
+```
+
+### The in and not in Operators
+
+```python
+'howdy' in ['hello', 'hi', 'howdy', 'heyas']
+```
+
+```python
+spam = ['hello', 'hi', 'howdy', 'heyas']
+False
+```
+
+```python
+'howdy' not in spam
+```
+
+```python
+'cat' not in spam
+```
+
+### The Multiple Assignment Trick
+
+The multiple assignment trick is a shortcut that lets you assign multiple variables with the values in a list in one line of code. So instead of doing this:
+
+```python
+cat = ['fat', 'orange', 'loud']
+size = cat[0]
+color = cat[1]
+disposition = cat[2]
+```
+
+You could type this line of code:
+
+```python
+cat = ['fat', 'orange', 'loud']
+size, color, disposition = cat
+```
+
+The multiple assignment trick can also be used to swap the values in two variables:
+
+```python
+a, b = 'Alice', 'Bob'
+a, b = b, a
+print(a)
+```
+
+```python
+print(b)
+```
+
+### Augmented Assignment Operators
+
+| Operator    | Equivalent        |
+| ----------- | ----------------- |
+| `spam += 1` | `spam = spam + 1` |
+| `spam -= 1` | `spam = spam - 1` |
+| `spam *= 1` | `spam = spam * 1` |
+| `spam /= 1` | `spam = spam / 1` |
+| `spam %= 1` | `spam = spam % 1` |
+
+Examples:
+
+```python
+spam = 'Hello'
+spam += ' world!'
+spam
+```
+
+```python
+bacon = ['Zophie']
+bacon *= 3
+bacon
+```
+
+### Finding a Value in a List with the index Method
+
+```python
+spam = ['Zophie', 'Pooka', 'Fat-tail', 'Pooka']
+spam.index('Pooka')
+```
+
+### Adding Values to Lists with append and insert
+
+**append()**:
+
+```python
+spam = ['cat', 'dog', 'bat']
+spam.append('moose')
+spam
+```
+
+**insert()**:
+
+```python
+spam = ['cat', 'dog', 'bat']
+spam.insert(1, 'chicken')
+spam
+```
+
+### Removing Values from Lists with remove
+
+```python
+spam = ['cat', 'bat', 'rat', 'elephant']
+spam.remove('bat')
+spam
+```
+
+If the value appears multiple times in the list, only the first instance of the value will be removed.
+
+### Sorting the Values in a List with sort
+
+```python
+spam = [2, 5, 3.14, 1, -7]
+spam.sort()
+spam
+```
+
+```python
+spam = ['ants', 'cats', 'dogs', 'badgers', 'elephants']
+spam.sort()
+spam
+```
+
+You can also pass True for the reverse keyword argument to have sort() sort the values in reverse order:
+
+```python
+spam.sort(reverse=True)
+spam
+```
+
+If you need to sort the values in regular alphabetical order, pass str. lower for the key keyword argument in the sort() method call:
+
+```python
+spam = ['a', 'z', 'A', 'Z']
+spam.sort(key=str.lower)
+spam
+```
+
+You can use the built-in function `sorted` to return a new list:
+
+```python
+spam = ['ants', 'cats', 'dogs', 'badgers', 'elephants']
+sorted(spam)
+```
+
+## Tuple Data Type
+
+```python
+eggs = ('hello', 42, 0.5)
+eggs[0]
+```
+
+```python
+eggs[1:3]
+```
+
+```python
+len(eggs)
+```
+
+The main way that tuples are different from lists is that tuples, like strings, are immutable.
+
+## Converting Types with the list and tuple Functions
+
+```python
+tuple(['cat', 'dog', 5])
+```
+
+```python
+list(('cat', 'dog', 5))
+```
+
+```python
+list('hello')
+```
+### Tuples in Python
+
+### Dictionaries in Python
+
+### Sets in Python
 
 ## Functions
 
