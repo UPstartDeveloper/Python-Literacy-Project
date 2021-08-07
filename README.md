@@ -5,7 +5,7 @@ These exercises were originally authored by [Milad Toutounchian](https://www.lin
 
 ## How to Use this Repo:
 
-**Start Here** to see our welcome document! This will get your feet wet in what Python has to offer.
+**Start Here** to see our [welcome](https://github.com/UPstartDeveloper/Python-Literacy-Project/blob/main/welcome/Hello_Python_TLDR.md) document! This will get your feet wet in what Python has to offer.
 
 ## Chapter 0: Python Skills Needed For Data Science
 In this section we discuss a variety of utilities in Python for solving problems, especially those involving array manipulations (which you *might* just happen to across in the field of data science :).
