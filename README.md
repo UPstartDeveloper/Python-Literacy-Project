@@ -11,5 +11,5 @@ These exercises were originally authored by [Milad Toutounchian](https://www.lin
 In this section we discuss a variety of utilities in Python for solving problems, especially those involving array manipulations (which you *might* just happen to across in the field of data science :).
 
 1. Chapter Activites:
-    a. [Part 1](https://github.com/UPstartDeveloper/Python-Literacy-Project/blob/main/chapter0-exercises/chapter_0_part1.ipynb)
-    b. [Part 2](https://github.com/UPstartDeveloper/Python-Literacy-Project/blob/main/chapter0-exercises/chapter_0_part2.ipynb)
+    1. [Part 1](https://github.com/UPstartDeveloper/Python-Literacy-Project/blob/main/chapter0-exercises/chapter_0_part1.ipynb)
+    2. [Part 2](https://github.com/UPstartDeveloper/Python-Literacy-Project/blob/main/chapter0-exercises/chapter_0_part2.ipynb)
